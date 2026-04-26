@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/pago", "destination": "/pago/index.html" },
+    { "source": "/tyc", "destination": "/tyc/index.html" }
+  ]
+}
