@@ -1,6 +1,6 @@
 {
   "rewrites": [
-    { "source": "/pago", "destination": "/pago/index.html" },
-    { "source": "/tyc", "destination": "/tyc/index.html" }
+    { "source": "/gestion-x7k2-pago", "destination": "/pago/index.html" },
+    { "source": "/gestion-x7k2-tyc", "destination": "/tyc/index.html" }
   ]
 }
