@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /gestion-x7k2-pago
+Disallow: /gestion-x7k2-tyc
+Disallow: /publicar-x7k2
+Disallow: /marketplace-x7k2
