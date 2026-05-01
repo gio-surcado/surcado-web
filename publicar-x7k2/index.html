@@ -1,0 +1,716 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Completá tu publicación — Surcado</title>
+  <link rel="icon" href="/assets/logos/Icon_Surcado_blue.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #5151C6;
+      --blue-dark: #1E2254;
+      --blue-bg: #EEEEF9;
+      --teal: #28D4C5;
+      --teal-soft: rgba(40, 212, 197, 0.12);
+      --gray-light: #F3F5F9;
+      --gray-border: #E5E7EB;
+      --text: #1A1A2E;
+      --muted: #6B6B8A;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      background: var(--blue-bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding: 16px 12px 48px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ---------- HEADER ---------- */
+    .header {
+      text-align: center;
+      padding: 24px 12px 28px;
+    }
+
+    .logo {
+      height: 28px;
+      width: auto;
+      margin-bottom: 28px;
+    }
+
+    .greeting {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 22px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .greeting .wave {
+      display: inline-block;
+      animation: wave 1.6s ease-in-out infinite;
+      transform-origin: 70% 70%;
+    }
+
+    @keyframes wave {
+      0%, 60%, 100% { transform: rotate(0); }
+      10%, 30% { transform: rotate(14deg); }
+      20% { transform: rotate(-8deg); }
+      40% { transform: rotate(10deg); }
+      50% { transform: rotate(0); }
+    }
+
+    .car-summary {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.5;
+      margin-bottom: 16px;
+    }
+
+    .car-summary strong {
+      color: var(--blue-dark);
+      font-weight: 800;
+    }
+
+    .price-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      background: var(--white);
+      color: var(--blue);
+      padding: 10px 18px;
+      border-radius: 100px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 18px;
+      box-shadow: 0 6px 16px rgba(81, 81, 198, 0.10);
+    }
+
+    .step-hint {
+      display: inline-block;
+      margin-top: 14px;
+      font-size: 12px;
+      font-weight: 700;
+      color: #0F8378;
+      background: var(--teal-soft);
+      padding: 5px 12px;
+      border-radius: 100px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ---------- SECTION CARDS ---------- */
+    .section {
+      background: var(--white);
+      border-radius: 20px;
+      padding: 22px 20px;
+      margin-bottom: 14px;
+      box-shadow: 0 4px 16px rgba(81, 81, 198, 0.05);
+    }
+
+    .section-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--blue-dark);
+      margin-bottom: 18px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-title small {
+      font-weight: 600;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    /* ---------- FIELD ---------- */
+    .field {
+      margin-bottom: 18px;
+    }
+    .field:last-child { margin-bottom: 0; }
+
+    .field-label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--muted);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    /* ---------- SEGMENTED CONTROL ---------- */
+    .segmented {
+      display: flex;
+      background: var(--gray-light);
+      border-radius: 12px;
+      padding: 4px;
+      gap: 4px;
+    }
+
+    .segmented input { display: none; }
+
+    .segmented label {
+      flex: 1;
+      text-align: center;
+      padding: 10px 6px;
+      border-radius: 9px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--muted);
+      cursor: pointer;
+      transition: all 0.18s;
+      user-select: none;
+    }
+
+    .segmented input:checked + label {
+      background: var(--blue);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(81, 81, 198, 0.25);
+    }
+
+    /* ---------- TOGGLE ROW ---------- */
+    .toggle-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--gray-light);
+    }
+
+    .toggle-row:first-of-type { padding-top: 4px; }
+    .toggle-row:last-of-type { border-bottom: none; padding-bottom: 4px; }
+
+    .toggle-label {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .switch {
+      position: relative;
+      display: inline-block;
+      width: 46px;
+      height: 26px;
+      flex-shrink: 0;
+    }
+
+    .switch input { opacity: 0; width: 0; height: 0; }
+
+    .slider {
+      position: absolute;
+      cursor: pointer;
+      inset: 0;
+      background: #D1D5DB;
+      border-radius: 26px;
+      transition: 0.2s;
+    }
+
+    .slider::before {
+      content: "";
+      position: absolute;
+      height: 20px;
+      width: 20px;
+      left: 3px;
+      top: 3px;
+      background: white;
+      border-radius: 50%;
+      transition: 0.2s;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.15);
+    }
+
+    .switch input:checked + .slider {
+      background: var(--blue);
+    }
+
+    .switch input:checked + .slider::before {
+      transform: translateX(20px);
+    }
+
+    /* ---------- PHOTO GRID ---------- */
+    .photo-hint {
+      font-size: 13px;
+      color: var(--muted);
+      margin-bottom: 14px;
+      line-height: 1.5;
+    }
+
+    .photo-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .photo-slot {
+      aspect-ratio: 1;
+      background: var(--gray-light);
+      border: 2px dashed #C8CDD9;
+      border-radius: 14px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.2s;
+    }
+
+    .photo-slot:hover {
+      border-color: var(--blue);
+      background: var(--blue-bg);
+    }
+
+    .photo-slot.has-photo {
+      border: 2px solid var(--teal);
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+
+    .photo-slot input { display: none; }
+
+    .photo-slot .icon {
+      font-size: 22px;
+      margin-bottom: 4px;
+      opacity: 0.6;
+    }
+
+    .photo-slot .label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .photo-slot.has-photo .icon,
+    .photo-slot.has-photo .label { display: none; }
+
+    .photo-slot .remove {
+      position: absolute;
+      top: 6px;
+      right: 6px;
+      background: rgba(0, 0, 0, 0.65);
+      color: white;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      line-height: 1;
+    }
+
+    .photo-slot.has-photo .remove { display: flex; }
+
+    /* ---------- TEXTAREA ---------- */
+    textarea {
+      width: 100%;
+      min-height: 110px;
+      padding: 14px 16px;
+      background: var(--gray-light);
+      border: 2px solid transparent;
+      border-radius: 14px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      resize: vertical;
+      transition: all 0.2s;
+      line-height: 1.5;
+    }
+
+    textarea:focus {
+      outline: none;
+      border-color: var(--blue);
+      background: var(--white);
+    }
+
+    textarea::placeholder {
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    /* ---------- SUBMIT ---------- */
+    .submit-btn {
+      width: 100%;
+      background: var(--blue);
+      color: var(--white);
+      padding: 18px;
+      border-radius: 100px;
+      border: none;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(81, 81, 198, 0.30);
+      margin-top: 24px;
+      transition: all 0.2s;
+    }
+
+    .submit-btn:hover:not(:disabled) {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 14px 32px rgba(81, 81, 198, 0.4);
+    }
+
+    .submit-btn:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .footer-note {
+      text-align: center;
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 18px;
+      padding: 0 16px;
+      line-height: 1.6;
+    }
+
+    /* ---------- SUCCESS ---------- */
+    .success {
+      background: var(--white);
+      border-radius: 24px;
+      padding: 56px 28px 48px;
+      text-align: center;
+      box-shadow: 0 4px 20px rgba(81, 81, 198, 0.06);
+      margin-top: 48px;
+    }
+
+    .success-icon {
+      width: 84px;
+      height: 84px;
+      background: var(--teal-soft);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      margin: 0 auto 24px;
+      animation: pop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes pop {
+      from { transform: scale(0); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    .success-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 24px;
+      color: var(--text);
+      margin-bottom: 12px;
+    }
+
+    .success-sub {
+      color: var(--muted);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    .success-tag {
+      display: inline-block;
+      margin-top: 24px;
+      background: var(--teal-soft);
+      color: #0F8378;
+      padding: 8px 16px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 13px;
+    }
+
+    .back-to-wa-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--blue);
+      color: var(--white);
+      padding: 14px 28px;
+      border-radius: 100px;
+      border: none;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      cursor: pointer;
+      margin-top: 28px;
+      transition: all 0.2s;
+      text-decoration: none;
+      box-shadow: 0 6px 18px rgba(81, 81, 198, 0.25);
+    }
+
+    .back-to-wa-btn:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+      box-shadow: 0 10px 24px rgba(81, 81, 198, 0.35);
+    }
+
+    .back-to-wa-btn:active {
+      transform: translateY(0);
+    }
+
+    /* ---------- DEBUG (solo C.1) ---------- */
+    .debug-data {
+      margin-top: 18px;
+      padding: 14px;
+      background: var(--gray-light);
+      border-radius: 12px;
+      font-family: 'Courier New', monospace;
+      font-size: 11px;
+      color: var(--muted);
+      text-align: left;
+      max-height: 220px;
+      overflow-y: auto;
+      white-space: pre-wrap;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ===== FORM STATE ===== -->
+<div class="app" id="form-state">
+
+  <header class="header">
+    <img src="/assets/logos/Surcado_blue.png" alt="Surcado" class="logo">
+    <div class="greeting">
+      ¡Hola! <span class="wave">👋</span>
+    </div>
+    <div class="car-summary">
+      Estás a un paso de publicar tu<br>
+      <strong id="car-title">Honda Civic 2018</strong>
+    </div>
+    <div class="price-pill" id="car-price">$18.500.000</div>
+    <div class="step-hint">Te toma 2 minutos</div>
+  </header>
+
+  <!-- SECTION 1 -->
+  <div class="section">
+    <div class="section-title">Estado del auto</div>
+
+    <div class="field">
+      <div class="field-label">Estado general</div>
+      <div class="segmented">
+        <input type="radio" name="estado_general" id="eg-impecable" value="impecable">
+        <label for="eg-impecable">Impecable</label>
+        <input type="radio" name="estado_general" id="eg-muy_bueno" value="muy_bueno" checked>
+        <label for="eg-muy_bueno">Muy bueno</label>
+        <input type="radio" name="estado_general" id="eg-bueno" value="bueno">
+        <label for="eg-bueno">Bueno</label>
+        <input type="radio" name="estado_general" id="eg-a_reparar" value="a_reparar">
+        <label for="eg-a_reparar">A reparar</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">Transmisión</div>
+      <div class="segmented">
+        <input type="radio" name="transmision" id="tr-manual" value="manual" checked>
+        <label for="tr-manual">Manual</label>
+        <input type="radio" name="transmision" id="tr-automatica" value="automatica">
+        <label for="tr-automatica">Automática</label>
+        <input type="radio" name="transmision" id="tr-cvt" value="cvt">
+        <label for="tr-cvt">CVT</label>
+      </div>
+    </div>
+
+    <div class="toggle-row">
+      <span class="toggle-label">Tiene GNC</span>
+      <label class="switch">
+        <input type="checkbox" id="tiene_gnc">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- SECTION 2 -->
+  <div class="section">
+    <div class="section-title">Equipamiento</div>
+
+    <div class="toggle-row">
+      <span class="toggle-label">Aire acondicionado</span>
+      <label class="switch"><input type="checkbox" data-eq="aire_acondicionado"><span class="slider"></span></label>
+    </div>
+    <div class="toggle-row">
+      <span class="toggle-label">Dirección asistida</span>
+      <label class="switch"><input type="checkbox" data-eq="direccion_asistida"><span class="slider"></span></label>
+    </div>
+    <div class="toggle-row">
+      <span class="toggle-label">Cierre centralizado</span>
+      <label class="switch"><input type="checkbox" data-eq="cierre_centralizado"><span class="slider"></span></label>
+    </div>
+    <div class="toggle-row">
+      <span class="toggle-label">Alarma</span>
+      <label class="switch"><input type="checkbox" data-eq="alarma"><span class="slider"></span></label>
+    </div>
+    <div class="toggle-row">
+      <span class="toggle-label">Frenos ABS</span>
+      <label class="switch"><input type="checkbox" data-eq="abs"><span class="slider"></span></label>
+    </div>
+
+    <div class="field" style="margin-top:22px;">
+      <div class="field-label">Vidrios eléctricos</div>
+      <div class="segmented">
+        <input type="radio" name="vidrios" id="v-ninguno" value="ninguno" checked>
+        <label for="v-ninguno">Ninguno</label>
+        <input type="radio" name="vidrios" id="v-delanteros" value="delanteros">
+        <label for="v-delanteros">Delanteros</label>
+        <input type="radio" name="vidrios" id="v-todos" value="todos">
+        <label for="v-todos">Todos</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">Tipo de llantas</div>
+      <div class="segmented">
+        <input type="radio" name="llantas" id="ll-originales" value="originales" checked>
+        <label for="ll-originales">Originales</label>
+        <input type="radio" name="llantas" id="ll-aleacion" value="aleacion">
+        <label for="ll-aleacion">Aleación</label>
+        <input type="radio" name="llantas" id="ll-deportivas" value="deportivas">
+        <label for="ll-deportivas">Deportivas</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">Tapizado</div>
+      <div class="segmented">
+        <input type="radio" name="tapizado" id="ta-tela" value="tela" checked>
+        <label for="ta-tela">Tela</label>
+        <input type="radio" name="tapizado" id="ta-cuero" value="cuero">
+        <label for="ta-cuero">Cuero</label>
+        <input type="radio" name="tapizado" id="ta-mixto" value="mixto">
+        <label for="ta-mixto">Mixto</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">Airbags</div>
+      <div class="segmented">
+        <input type="radio" name="airbags" id="ab-0" value="0">
+        <label for="ab-0">0</label>
+        <input type="radio" name="airbags" id="ab-2" value="2" checked>
+        <label for="ab-2">2</label>
+        <input type="radio" name="airbags" id="ab-4" value="4">
+        <label for="ab-4">4</label>
+        <input type="radio" name="airbags" id="ab-6" value="6">
+        <label for="ab-6">6+</label>
+      </div>
+    </div>
+
+    <div class="toggle-row" style="margin-top:18px;">
+      <span class="toggle-label">Service al día</span>
+      <label class="switch">
+        <input type="checkbox" id="service_al_dia">
+        <span class="slider"></span>
+      </label>
+    </div>
+  </div>
+
+  <!-- SECTION 3 -->
+  <div class="section">
+    <div class="section-title">Descripción <small>(opcional)</small></div>
+    <textarea id="descripcion" placeholder="Contales a los compradores qué hace especial a tu auto. ¿Lo cuidaste mucho? ¿Service al día en el oficial? ¿Algún detalle que quieras destacar?"></textarea>
+  </div>
+
+  <button class="submit-btn" id="submit-btn">Publicar mi auto</button>
+
+  <p class="footer-note">
+    Al publicar, tu auto va a estar disponible en surcado.com. Los interesados te van a poder contactar a través de nuestro asistente de WhatsApp.
+  </p>
+
+</div>
+
+<!-- ===== SUCCESS STATE ===== -->
+<div class="app" style="display:none;" id="success-state">
+  <div class="success">
+    <div class="success-icon">🎉</div>
+    <div class="success-title">¡Casi listo!</div>
+    <p class="success-sub">
+      Volvé a WhatsApp, ya te estamos escribiendo para que nos mandes 3 fotos del auto. En cuanto las recibamos, tu publicación queda activa.
+    </p>
+    <div class="success-tag">Último paso</div>
+    <br>
+    <button class="back-to-wa-btn" onclick="volverAWhatsApp()">
+      Volver a WhatsApp →
+    </button>
+  </div>
+</div>
+
+<script>
+  // ---- C.1: datos mock (en C.2 los traemos de Supabase) ----
+  const params = new URLSearchParams(window.location.search);
+  const phoneNumber = params.get('id') || 'whatsapp:+5493487662058';
+
+  const carMock = {
+    marca: 'Honda',
+    modelo: 'Civic',
+    anio: '2018',
+    precio: 18500000
+  };
+
+  document.getElementById('car-title').textContent = `${carMock.marca} ${carMock.modelo} ${carMock.anio}`;
+  document.getElementById('car-price').textContent = '$' + carMock.precio.toLocaleString('es-AR');
+
+  // ---- Submit (mock para C.1) ----
+  document.getElementById('submit-btn').addEventListener('click', () => {
+    const equipamiento = {};
+    document.querySelectorAll('input[data-eq]').forEach(cb => {
+      equipamiento[cb.dataset.eq] = cb.checked;
+    });
+
+    const data = {
+      phone_number: phoneNumber,
+      estado_general: document.querySelector('input[name=estado_general]:checked')?.value,
+      transmision: document.querySelector('input[name=transmision]:checked')?.value,
+      service_al_dia: document.getElementById('service_al_dia').checked,
+      tiene_gnc: document.getElementById('tiene_gnc').checked,
+      vidrios_electricos: document.querySelector('input[name=vidrios]:checked')?.value,
+      tipo_llantas: document.querySelector('input[name=llantas]:checked')?.value,
+      tapizado: document.querySelector('input[name=tapizado]:checked')?.value,
+      airbags: Number(document.querySelector('input[name=airbags]:checked')?.value),
+      equipamiento,
+      descripcion: document.getElementById('descripcion').value
+    };
+
+    console.log('Form data (mock):', data);
+
+    document.getElementById('form-state').style.display = 'none';
+    document.getElementById('success-state').style.display = 'block';
+
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  // ---- Volver a WhatsApp ----
+  // Intenta cerrar la ventana (algunos in-app browsers lo permiten);
+  // si no, abre WhatsApp directamente con el chat de Surcado (sandbox de Twilio).
+  function volverAWhatsApp() {
+    window.close();
+    setTimeout(() => {
+      window.location.href = 'https://wa.me/14155238886';
+    }, 200);
+  }
+</script>
+
+</body>
+</html>
