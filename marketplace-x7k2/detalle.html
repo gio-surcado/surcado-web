@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Auto en Surcado</title>
+  <link rel="icon" href="/assets/logos/Icon_Surcado_blue.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --blue: #5151C6;
+      --blue-dark: #1E2254;
+      --blue-bg: #EEEEF9;
+      --teal: #28D4C5;
+      --teal-soft: rgba(40, 212, 197, 0.12);
+      --gold: #F5B72E;
+      --gold-soft: rgba(245, 183, 46, 0.15);
+      --gray-light: #F3F5F9;
+      --gray-border: #E5E7EB;
+      --text: #1A1A2E;
+      --muted: #6B6B8A;
+      --white: #ffffff;
+    }
+
+    body {
+      font-family: 'Nunito Sans', sans-serif;
+      background: var(--blue-bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: 100px;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .app {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    /* ---------- TOP BAR ---------- */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 16px;
+      background: var(--white);
+    }
+
+    .topbar img {
+      height: 22px;
+    }
+
+    /* ---------- HERO PHOTO ---------- */
+    .hero-photo {
+      width: 100%;
+      aspect-ratio: 4/3;
+      background: var(--gray-light);
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-photo .placeholder {
+      color: var(--muted);
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      padding: 20px;
+    }
+
+    .hero-photo .placeholder .icon {
+      display: block;
+      font-size: 48px;
+      margin-bottom: 12px;
+      opacity: 0.5;
+    }
+
+    .sello-floating {
+      position: absolute;
+      top: 14px;
+      right: 14px;
+      background: var(--gold);
+      color: var(--white);
+      padding: 7px 14px;
+      border-radius: 100px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 12px;
+      display: none;
+      align-items: center;
+      gap: 5px;
+      box-shadow: 0 4px 14px rgba(245, 183, 46, 0.4);
+    }
+
+    .sello-floating.visible { display: inline-flex; }
+
+    /* ---------- INFO HEADER ---------- */
+    .info-header {
+      background: var(--white);
+      padding: 24px 20px 20px;
+    }
+
+    .car-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 24px;
+      color: var(--text);
+      line-height: 1.2;
+      margin-bottom: 6px;
+    }
+
+    .car-version {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+      margin-bottom: 14px;
+    }
+
+    .price {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 900;
+      font-size: 28px;
+      color: var(--blue);
+      margin-bottom: 12px;
+    }
+
+    .location {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 14px;
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    /* ---------- SPECS GRID ---------- */
+    .specs-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      padding: 0 12px;
+      margin-top: 12px;
+    }
+
+    .spec-card {
+      background: var(--white);
+      border-radius: 14px;
+      padding: 14px 16px;
+      box-shadow: 0 2px 8px rgba(81, 81, 198, 0.04);
+    }
+
+    .spec-card .label {
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+    }
+
+    .spec-card .value {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 15px;
+      color: var(--text);
+      text-transform: capitalize;
+    }
+
+    /* ---------- SECTIONS ---------- */
+    .section {
+      background: var(--white);
+      margin: 12px;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 2px 8px rgba(81, 81, 198, 0.04);
+    }
+
+    .section.verified {
+      background: linear-gradient(135deg, var(--gold-soft), rgba(245, 183, 46, 0.05));
+      border: 1.5px solid rgba(245, 183, 46, 0.3);
+    }
+
+    .section h2 {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      color: var(--blue-dark);
+      margin-bottom: 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section.verified h2 {
+      color: #8a6a0d;
+    }
+
+    .features {
+      list-style: none;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .features li {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text);
+      font-weight: 600;
+    }
+
+    .features li .check {
+      width: 18px;
+      height: 18px;
+      background: var(--teal-soft);
+      color: #0F8378;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 11px;
+      font-weight: 800;
+      flex-shrink: 0;
+    }
+
+    .verified-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .verified-list li {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(245, 183, 46, 0.2);
+      font-size: 14px;
+    }
+
+    .verified-list li:last-child { border-bottom: none; }
+
+    .verified-list .label {
+      color: var(--muted);
+      font-weight: 600;
+    }
+
+    .verified-list .value {
+      font-weight: 800;
+      color: var(--text);
+      font-family: 'Nunito', sans-serif;
+    }
+
+    .descripcion-text {
+      font-size: 15px;
+      line-height: 1.7;
+      color: var(--text);
+      white-space: pre-wrap;
+    }
+
+    /* ---------- CTA STICKY ---------- */
+    .cta-bar {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--white);
+      padding: 14px 16px;
+      box-shadow: 0 -8px 24px rgba(0, 0, 0, 0.08);
+      z-index: 100;
+    }
+
+    .cta-bar-inner {
+      max-width: 480px;
+      margin: 0 auto;
+    }
+
+    .cta-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      background: var(--blue);
+      color: var(--white);
+      padding: 16px;
+      border-radius: 100px;
+      border: none;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 16px;
+      cursor: pointer;
+      box-shadow: 0 8px 24px rgba(81, 81, 198, 0.3);
+      transition: all 0.2s;
+      text-decoration: none;
+    }
+
+    .cta-button:hover {
+      background: var(--blue-dark);
+      transform: translateY(-2px);
+    }
+
+    /* ---------- LOADING / ERROR ---------- */
+    .state-screen {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      text-align: center;
+    }
+
+    .state-screen .icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+      opacity: 0.6;
+    }
+
+    .state-screen .title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .state-screen .sub {
+      color: var(--muted);
+      font-size: 15px;
+      max-width: 320px;
+      line-height: 1.6;
+    }
+
+    .hidden { display: none !important; }
+  </style>
+</head>
+<body>
+
+<!-- LOADING STATE -->
+<div class="app state-screen" id="loading-state">
+  <div class="icon">⏳</div>
+  <div class="title">Cargando auto...</div>
+</div>
+
+<!-- ERROR STATE -->
+<div class="app state-screen hidden" id="error-state">
+  <div class="icon">🚗💨</div>
+  <div class="title">Auto no encontrado</div>
+  <div class="sub">Esta publicación no existe o ya no está disponible. Volvé a Surcado por WhatsApp para que te ayudemos a encontrar lo que buscás.</div>
+</div>
+
+<!-- CONTENT (oculto hasta que cargue) -->
+<div class="app hidden" id="content">
+
+  <div class="topbar">
+    <img src="/assets/logos/Surcado_blue.png" alt="Surcado">
+  </div>
+
+  <div class="hero-photo" id="hero-photo">
+    <div class="placeholder" id="photo-placeholder">
+      <span class="icon">📷</span>
+      Fotos próximamente
+    </div>
+    <span class="sello-floating" id="sello-floating">⭐ Verificado</span>
+  </div>
+
+  <div class="info-header">
+    <h1 class="car-title" id="car-title">—</h1>
+    <div class="car-version" id="car-version"></div>
+    <div class="price" id="car-price">—</div>
+    <div class="location"><span>📍</span> <span id="car-location">—</span></div>
+  </div>
+
+  <div class="specs-grid">
+    <div class="spec-card">
+      <div class="label">Kilómetros</div>
+      <div class="value" id="spec-km">—</div>
+    </div>
+    <div class="spec-card">
+      <div class="label">Combustible</div>
+      <div class="value" id="spec-comb">—</div>
+    </div>
+    <div class="spec-card">
+      <div class="label">Transmisión</div>
+      <div class="value" id="spec-trans">—</div>
+    </div>
+    <div class="spec-card">
+      <div class="label">Estado</div>
+      <div class="value" id="spec-estado">—</div>
+    </div>
+  </div>
+
+  <div class="section">
+    <h2>Equipamiento y características</h2>
+    <ul class="features" id="features-list"></ul>
+  </div>
+
+  <div class="section verified hidden" id="verified-section">
+    <h2>⭐ Datos verificados</h2>
+    <ul class="verified-list" id="verified-list"></ul>
+  </div>
+
+  <div class="section hidden" id="descripcion-section">
+    <h2>Descripción</h2>
+    <p class="descripcion-text" id="descripcion-text"></p>
+  </div>
+
+</div>
+
+<!-- CTA Bar (sticky) -->
+<div class="cta-bar hidden" id="cta-bar">
+  <div class="cta-bar-inner">
+    <a class="cta-button" id="cta-button" href="#">
+      💬 Consultar por este auto
+    </a>
+  </div>
+</div>
+
+<script>
+  // ---- Extraer id del path ----
+  const pathMatch = window.location.pathname.match(/\/marketplace-x7k2\/(\d+)/);
+  const carId = pathMatch ? Number(pathMatch[1]) : null;
+
+  // ---- Helpers ----
+  const cap = (s) => s ? s.charAt(0).toUpperCase() + s.slice(1).replace(/_/g, ' ') : '—';
+  const formatPrice = (n) => n ? '$' + Number(n).toLocaleString('es-AR') : '$ —';
+  const formatKm = (n) => n ? Number(n).toLocaleString('es-AR') + ' km' : '—';
+
+  // Mapping de transmisión
+  const transmisionLabel = {
+    manual: 'Manual',
+    automatica: 'Automática',
+    cvt: 'CVT'
+  };
+
+  const estadoGeneralLabel = {
+    impecable: 'Impecable',
+    muy_bueno: 'Muy bueno',
+    bueno: 'Bueno',
+    a_reparar: 'A reparar'
+  };
+
+  const equipamientoLabel = {
+    aire_acondicionado: 'Aire acondicionado',
+    direccion_asistida: 'Dirección asistida',
+    cierre_centralizado: 'Cierre centralizado',
+    alarma: 'Alarma',
+    abs: 'Frenos ABS'
+  };
+
+  function show(id) { document.getElementById(id).classList.remove('hidden'); }
+  function hide(id) { document.getElementById(id).classList.add('hidden'); }
+
+  // ---- Render del auto ----
+  function renderCar(car) {
+    // Header / título
+    const title = [car.marca, car.modelo, car.anio].filter(Boolean).join(' ');
+    document.getElementById('car-title').textContent = title;
+
+    if (car.version) {
+      document.getElementById('car-version').textContent = car.version;
+    }
+
+    document.getElementById('car-price').textContent = formatPrice(car.precio_publicacion);
+
+    const loc = [car.localidad, car.provincia].filter(Boolean).join(', ');
+    document.getElementById('car-location').textContent = loc || 'Argentina';
+
+    // Foto principal o placeholder
+    const fotos = Array.isArray(car.fotos) ? car.fotos : [];
+    if (fotos.length > 0) {
+      document.getElementById('hero-photo').style.backgroundImage = `url(${fotos[0]})`;
+      hide('photo-placeholder');
+    }
+
+    // Sello verificado
+    if (car.sello_verificado) {
+      document.getElementById('sello-floating').classList.add('visible');
+    }
+
+    // Specs grid
+    document.getElementById('spec-km').textContent = formatKm(car.kilometros);
+    document.getElementById('spec-comb').textContent = cap(car.combustible);
+    document.getElementById('spec-trans').textContent = transmisionLabel[car.transmision] || cap(car.transmision);
+    document.getElementById('spec-estado').textContent = estadoGeneralLabel[car.estado_general] || cap(car.estado_general);
+
+    // Equipamiento
+    const features = [];
+    const eq = car.equipamiento || {};
+    Object.entries(equipamientoLabel).forEach(([key, label]) => {
+      if (eq[key]) features.push(label);
+    });
+    if (car.tiene_gnc) features.push('GNC instalado');
+    if (car.service_al_dia) features.push('Service al día');
+    if (car.airbags > 0) features.push(`${car.airbags} airbags`);
+    if (car.vidrios_electricos && car.vidrios_electricos !== 'ninguno') {
+      features.push(`Vidrios eléctricos ${car.vidrios_electricos}`);
+    }
+    if (car.tipo_llantas && car.tipo_llantas !== 'originales') {
+      features.push(`Llantas de ${car.tipo_llantas}`);
+    }
+    if (car.tapizado && car.tapizado !== 'tela') {
+      features.push(`Tapizado ${car.tapizado}`);
+    }
+    if (car.color) features.push(`Color ${cap(car.color)}`);
+    if (car.puertas) features.push(`${car.puertas} puertas`);
+
+    const featuresList = document.getElementById('features-list');
+    if (features.length === 0) {
+      featuresList.innerHTML = '<li style="color:var(--muted);font-style:italic;">Sin información adicional cargada.</li>';
+    } else {
+      featuresList.innerHTML = features.map(f => `<li><span class="check">✓</span>${f}</li>`).join('');
+    }
+
+    // Datos verificados (solo si sello)
+    if (car.sello_verificado) {
+      const verifiedItems = [];
+      if (car.titular) verifiedItems.push({ label: 'Titular', value: car.titular });
+      if (car.motor) verifiedItems.push({ label: 'Motor', value: car.motor });
+      if (car.chasis) verifiedItems.push({ label: 'Chasis', value: car.chasis });
+      if (car.patente) verifiedItems.push({ label: 'Patente', value: car.patente });
+
+      if (verifiedItems.length > 0) {
+        document.getElementById('verified-list').innerHTML = verifiedItems
+          .map(i => `<li><span class="label">${i.label}</span><span class="value">${i.value}</span></li>`)
+          .join('');
+        show('verified-section');
+      }
+    }
+
+    // Descripción
+    if (car.descripcion && car.descripcion.trim()) {
+      document.getElementById('descripcion-text').textContent = car.descripcion;
+      show('descripcion-section');
+    }
+
+    // CTA: armar mensaje pre-llenado para WhatsApp
+    const message = `¡Hola! Me interesa el ${title} (ID #${car.id}) que vi en Surcado.`;
+    const waUrl = 'whatsapp://send?phone=14155238886&text=' + encodeURIComponent(message);
+    const waFallback = 'https://wa.me/14155238886?text=' + encodeURIComponent(message);
+
+    const ctaButton = document.getElementById('cta-button');
+    ctaButton.href = waUrl;
+    ctaButton.addEventListener('click', (e) => {
+      e.preventDefault();
+      window.location.href = waUrl;
+      setTimeout(() => {
+        if (!document.hidden) window.location.href = waFallback;
+      }, 1500);
+    });
+
+    // Mostrar todo
+    hide('loading-state');
+    show('content');
+    show('cta-bar');
+    document.title = title + ' — Surcado';
+  }
+
+  // ---- Fetch ----
+  async function cargarAuto() {
+    if (!carId) {
+      hide('loading-state');
+      show('error-state');
+      return;
+    }
+    try {
+      const res = await fetch('https://n8n.surcado.com/webhook/marketplace-detalle', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id: carId })
+      });
+      if (!res.ok) throw new Error('Webhook respondió ' + res.status);
+      const data = await res.json();
+      // El webhook responde como array (firstIncomingItem wrapeado), o como objeto
+      const car = Array.isArray(data) ? data[0] : data;
+      if (!car || car.id === undefined || car.id === null) {
+        throw new Error('Auto no encontrado');
+      }
+      renderCar(car);
+    } catch (err) {
+      console.error('Error cargando auto:', err);
+      hide('loading-state');
+      show('error-state');
+    }
+  }
+
+  cargarAuto();
+</script>
+
+</body>
+</html>
