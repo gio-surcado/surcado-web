@@ -482,6 +482,23 @@
       transform: translateY(0);
     }
 
+    .view-publication-link {
+      display: inline-block;
+      margin-top: 18px;
+      color: var(--blue);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 14px;
+      text-decoration: none;
+      border-bottom: 2px solid rgba(81, 81, 198, 0.25);
+      padding-bottom: 2px;
+      transition: all 0.2s;
+    }
+
+    .view-publication-link:hover {
+      border-bottom-color: var(--blue);
+    }
+
     /* ---------- DEBUG (solo C.1) ---------- */
     .debug-data {
       margin-top: 18px;
@@ -671,6 +688,10 @@
     <button class="back-to-wa-btn" onclick="volverAWhatsApp()">
       Volver a WhatsApp →
     </button>
+    <br>
+    <a class="view-publication-link" id="view-publication-link" href="#" target="_blank" rel="noopener">
+      Ver mi publicación
+    </a>
   </div>
 </div>
 
@@ -750,6 +771,11 @@
       if (!res.ok) throw new Error('webhook respondió ' + res.status);
       const result = await res.json();
       if (!result.ok) throw new Error(result.error || 'No se pudo publicar');
+
+      // Setear link a la publicación recién creada
+      if (result.id !== undefined && result.id !== null) {
+        document.getElementById('view-publication-link').href = `/marketplace-x7k2/${result.id}`;
+      }
 
       // Éxito: mostrar success state
       document.getElementById('form-state').style.display = 'none';
