@@ -498,9 +498,9 @@
     </div>
     <div class="car-summary">
       Estás a un paso de publicar tu<br>
-      <strong id="car-title">Honda Civic 2018</strong>
+      <strong id="car-title">...</strong>
     </div>
-    <div class="price-pill" id="car-price">$18.500.000</div>
+    <div class="price-pill" id="car-price">$ ...</div>
     <div class="step-hint">Te toma 2 minutos</div>
   </header>
 
@@ -658,19 +658,42 @@
 </div>
 
 <script>
-  // ---- C.1: datos mock (en C.2 los traemos de Supabase) ----
+  // ---- C.2.2: traer datos reales del auto desde n8n ----
   const params = new URLSearchParams(window.location.search);
-  const phoneNumber = params.get('id') || 'whatsapp:+5493487662058';
+  // URL parser decodifica '+' como espacio, restituirlo
+  const phoneNumber = (params.get('id') || '').replace(/^whatsapp:\s/, 'whatsapp:+');
 
-  const carMock = {
-    marca: 'Honda',
-    modelo: 'Civic',
-    anio: '2018',
-    precio: 18500000
-  };
+  function renderCarHeader(car) {
+    const title = [car.marca, car.modelo, car.anio, car.version].filter(Boolean).join(' ');
+    document.getElementById('car-title').textContent = title || 'tu auto';
+    const precio = Number(car.precio_publicacion) || 0;
+    document.getElementById('car-price').textContent = precio
+      ? '$' + precio.toLocaleString('es-AR')
+      : '$ —';
+  }
 
-  document.getElementById('car-title').textContent = `${carMock.marca} ${carMock.modelo} ${carMock.anio}`;
-  document.getElementById('car-price').textContent = '$' + carMock.precio.toLocaleString('es-AR');
+  async function cargarDatosAuto() {
+    if (!phoneNumber) {
+      renderCarHeader({});
+      return;
+    }
+    try {
+      const res = await fetch('https://n8n.surcado.com/webhook/publicacion-info', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ phone_number: phoneNumber })
+      });
+      if (!res.ok) throw new Error('webhook respondió ' + res.status);
+      const data = await res.json();
+      if (!data.ok) throw new Error(data.error || 'no encontrado');
+      renderCarHeader(data);
+    } catch (err) {
+      console.error('Error cargando datos del auto:', err);
+      renderCarHeader({});
+    }
+  }
+
+  cargarDatosAuto();
 
   // ---- Submit (mock para C.1) ----
   document.getElementById('submit-btn').addEventListener('click', () => {
