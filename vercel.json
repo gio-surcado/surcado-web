@@ -2,7 +2,8 @@
   "rewrites": [
     { "source": "/gestion-x7k2-pago", "destination": "/gestion-x7k2-pago/index.html" },
     { "source": "/gestion-x7k2-tyc", "destination": "/gestion-x7k2-tyc/index.html" },
-    { "source": "/publicar-x7k2", "destination": "/publicar-x7k2/index.html" }
+    { "source": "/publicar-x7k2", "destination": "/publicar-x7k2/index.html" },
+    { "source": "/marketplace-x7k2/:id", "destination": "/marketplace-x7k2/detalle.html" }
   ],
   "redirects": [
     { "source": "/pago", "destination": "/", "permanent": false },
