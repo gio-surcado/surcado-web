@@ -726,13 +726,16 @@
   });
 
   // ---- Volver a WhatsApp ----
-  // Intenta cerrar la ventana (algunos in-app browsers lo permiten);
-  // si no, abre WhatsApp directamente con el chat de Surcado (sandbox de Twilio).
+  // Usamos el protocolo nativo `whatsapp://` que abre la app directamente,
+  // sin pasar por el browser. Si por algún motivo no abre (raro: WhatsApp
+  // no instalado), fallback a wa.me como red de seguridad.
   function volverAWhatsApp() {
-    window.close();
+    window.location.href = 'whatsapp://send?phone=14155238886';
     setTimeout(() => {
-      window.location.href = 'https://wa.me/14155238886';
-    }, 200);
+      if (!document.hidden) {
+        window.location.href = 'https://wa.me/14155238886';
+      }
+    }, 1500);
   }
 </script>
 
