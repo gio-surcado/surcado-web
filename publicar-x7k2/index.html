@@ -74,41 +74,42 @@
 
     .car-summary {
       color: var(--muted);
-      font-size: 15px;
+      font-size: 17px;
       line-height: 1.5;
-      margin-bottom: 16px;
+      margin-bottom: 14px;
     }
 
     .car-summary strong {
+      display: block;
       color: var(--blue-dark);
-      font-weight: 800;
-    }
-
-    .price-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--white);
-      color: var(--blue);
-      padding: 10px 18px;
-      border-radius: 100px;
       font-family: 'Nunito', sans-serif;
       font-weight: 800;
-      font-size: 18px;
-      box-shadow: 0 6px 16px rgba(81, 81, 198, 0.10);
+      font-size: 24px;
+      margin-top: 6px;
+      line-height: 1.25;
     }
 
-    .step-hint {
-      display: inline-block;
-      margin-top: 14px;
-      font-size: 12px;
+    .price-line {
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 17px;
       font-weight: 700;
-      color: #0F8378;
-      background: var(--teal-soft);
-      padding: 5px 12px;
-      border-radius: 100px;
+      color: var(--muted);
+      margin-bottom: 22px;
+    }
+
+    .price-line span {
+      color: var(--blue);
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 20px;
+    }
+
+    .next-step {
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--blue-dark);
       text-transform: uppercase;
-      letter-spacing: 0.5px;
+      letter-spacing: 0.6px;
     }
 
     /* ---------- SECTION CARDS ---------- */
@@ -500,8 +501,8 @@
       Estás a un paso de publicar tu<br>
       <strong id="car-title">...</strong>
     </div>
-    <div class="price-pill" id="car-price">$ ...</div>
-    <div class="step-hint">Te toma 2 minutos</div>
+    <div class="price-line">Precio: <span id="car-price">$ ...</span></div>
+    <div class="next-step">Completá los siguientes datos:</div>
   </header>
 
   <!-- SECTION 1 -->
