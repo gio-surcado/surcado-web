@@ -386,6 +386,18 @@
       line-height: 1.6;
     }
 
+    .error-msg {
+      background: #FEF2F2;
+      color: #DC2626;
+      padding: 12px 16px;
+      border-radius: 12px;
+      font-size: 14px;
+      font-weight: 600;
+      margin-top: 14px;
+      display: none;
+      text-align: center;
+    }
+
     /* ---------- SUCCESS ---------- */
     .success {
       background: var(--white);
@@ -636,6 +648,10 @@
 
   <button class="submit-btn" id="submit-btn">Publicar mi auto</button>
 
+  <div class="error-msg" id="error-msg">
+    Hubo un error al publicar tu auto. Probá de nuevo en un momento.
+  </div>
+
   <p class="footer-note">
     Al publicar, tu auto va a estar disponible en surcado.com. Los interesados te van a poder contactar a través de nuestro asistente de WhatsApp.
   </p>
@@ -696,8 +712,11 @@
 
   cargarDatosAuto();
 
-  // ---- Submit (mock para C.1) ----
-  document.getElementById('submit-btn').addEventListener('click', () => {
+  // ---- Submit real al webhook publicacion-completada ----
+  document.getElementById('submit-btn').addEventListener('click', async () => {
+    const btn = document.getElementById('submit-btn');
+    const errorMsg = document.getElementById('error-msg');
+
     const equipamiento = {};
     document.querySelectorAll('input[data-eq]').forEach(cb => {
       equipamiento[cb.dataset.eq] = cb.checked;
@@ -717,12 +736,31 @@
       descripcion: document.getElementById('descripcion').value
     };
 
-    console.log('Form data (mock):', data);
+    // Loading state
+    btn.disabled = true;
+    btn.textContent = 'Publicando...';
+    errorMsg.style.display = 'none';
 
-    document.getElementById('form-state').style.display = 'none';
-    document.getElementById('success-state').style.display = 'block';
+    try {
+      const res = await fetch('https://n8n.surcado.com/webhook/publicacion-completada', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data)
+      });
+      if (!res.ok) throw new Error('webhook respondió ' + res.status);
+      const result = await res.json();
+      if (!result.ok) throw new Error(result.error || 'No se pudo publicar');
 
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+      // Éxito: mostrar success state
+      document.getElementById('form-state').style.display = 'none';
+      document.getElementById('success-state').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } catch (err) {
+      console.error('Error al publicar:', err);
+      btn.disabled = false;
+      btn.textContent = 'Publicar mi auto';
+      errorMsg.style.display = 'block';
+    }
   });
 
   // ---- Volver a WhatsApp ----
