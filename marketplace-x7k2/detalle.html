@@ -569,7 +569,8 @@
 
   // ---- Fetch ----
   async function cargarAuto() {
-    if (!carId) {
+    // Nota: usamos === null en lugar de !carId, porque id=0 es válido y !0 es true
+    if (carId === null || isNaN(carId)) {
       hide('loading-state');
       show('error-state');
       return;
