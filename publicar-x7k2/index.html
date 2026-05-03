@@ -621,11 +621,11 @@
     <div class="field-row">
       <div class="field">
         <div class="field-label">Marca</div>
-        <input type="text" id="marca" class="text-input" placeholder="Toyota" autocomplete="off">
+        <input type="text" id="marca" class="text-input" placeholder="" autocomplete="off">
       </div>
       <div class="field">
         <div class="field-label">Modelo</div>
-        <input type="text" id="modelo" class="text-input" placeholder="Corolla" autocomplete="off">
+        <input type="text" id="modelo" class="text-input" placeholder="" autocomplete="off">
       </div>
     </div>
 
@@ -640,13 +640,13 @@
       </div>
       <div class="field">
         <div class="field-label">Kilómetros</div>
-        <input type="number" id="kilometros" class="text-input" placeholder="80000" min="0" inputmode="numeric">
+        <input type="number" id="kilometros" class="text-input" placeholder="" min="0" inputmode="numeric">
       </div>
     </div>
 
     <div class="field">
       <div class="field-label">Versión</div>
-      <input type="text" id="version" class="text-input" placeholder="XEi 2.0 CVT" autocomplete="off">
+      <input type="text" id="version" class="text-input" placeholder="" autocomplete="off">
     </div>
 
     <div class="field">
@@ -680,22 +680,22 @@
     <div class="field-row">
       <div class="field">
         <div class="field-label">Color</div>
-        <input type="text" id="color" class="text-input" placeholder="Blanco" autocomplete="off">
+        <input type="text" id="color" class="text-input" placeholder="" autocomplete="off">
       </div>
       <div class="field">
         <div class="field-label">Patente</div>
-        <input type="text" id="patente" class="text-input" placeholder="AB123CD" autocomplete="off" style="text-transform:uppercase;">
+        <input type="text" id="patente" class="text-input" placeholder="" autocomplete="off" style="text-transform:uppercase;">
       </div>
     </div>
 
     <div class="field-row">
       <div class="field">
         <div class="field-label">Provincia</div>
-        <input type="text" id="provincia" class="text-input" placeholder="Buenos Aires" autocomplete="off">
+        <input type="text" id="provincia" class="text-input" placeholder="" autocomplete="off">
       </div>
       <div class="field">
         <div class="field-label">Localidad</div>
-        <input type="text" id="localidad" class="text-input" placeholder="Palermo" autocomplete="off">
+        <input type="text" id="localidad" class="text-input" placeholder="" autocomplete="off">
       </div>
     </div>
   </div>
@@ -719,7 +719,7 @@
       <div class="field-label">Precio en pesos</div>
       <div class="price-field-wrap">
         <span class="price-sym">$</span>
-        <input type="number" id="precio_publicacion" class="price-field-input" placeholder="3.500.000" min="0" inputmode="numeric">
+        <input type="text" id="precio_publicacion" class="price-field-input" placeholder="3.500.000" inputmode="numeric" autocomplete="off">
       </div>
     </div>
 
@@ -854,7 +854,7 @@
   <!-- ====== SECTION 5: Descripción ====== -->
   <div class="section">
     <div class="section-title">Descripción <small>(opcional)</small></div>
-    <textarea id="descripcion" placeholder="Contales a los compradores qué hace especial a tu auto. ¿Lo cuidaste mucho? ¿Service al día en el oficial? ¿Algún detalle que quieras destacar?"></textarea>
+    <textarea id="descripcion" placeholder=""></textarea>
   </div>
 
   <button class="submit-btn" id="submit-btn">Publicar mi auto</button>
@@ -881,8 +881,9 @@
     </p>
     <div class="success-tag">Último paso: las fotos</div>
     <br>
-    <button class="back-to-wa-btn" onclick="volverAWhatsApp()">
-      Volver a WhatsApp →
+    <p style="font-size:13px;color:var(--muted);margin-top:16px;" id="redirect-msg-precio">Volviendo a WhatsApp en <strong id="countdown-precio">4</strong>s...</p>
+    <button class="back-to-wa-btn" onclick="volverAWhatsApp()" style="margin-top:10px;">
+      Volver ahora →
     </button>
     <br>
     <a class="view-publication-link" id="view-publication-link" href="#" target="_blank" rel="noopener">
@@ -899,8 +900,9 @@
     </p>
     <div class="success-tag">Valuación en proceso</div>
     <br>
-    <button class="back-to-wa-btn" onclick="volverAWhatsApp()">
-      Volver a WhatsApp →
+    <p style="font-size:13px;color:var(--muted);margin-top:16px;" id="redirect-msg-val">Volviendo a WhatsApp en <strong id="countdown-val">4</strong>s...</p>
+    <button class="back-to-wa-btn" onclick="volverAWhatsApp()" style="margin-top:10px;">
+      Volver ahora →
     </button>
   </div>
 
@@ -926,6 +928,12 @@
   const params = new URLSearchParams(window.location.search);
   // Bug conocido: URL parser decodifica '+' como espacio
   const phoneNumber = (params.get('id') || '').replace(/^whatsapp:\s/, 'whatsapp:+');
+
+  // ---- Formato miles en precio ----
+  document.getElementById('precio_publicacion').addEventListener('input', function () {
+    const raw = this.value.replace(/\D/g, '');
+    this.value = raw ? Number(raw).toLocaleString('es-AR') : '';
+  });
 
   // ---- Modo precio ----
   let precioMode = 'se'; // 'se' | 'no'
@@ -1076,7 +1084,7 @@
       }
     }
     if (precioMode === 'se') {
-      const precio = Number(document.getElementById('precio_publicacion').value);
+      const precio = Number(document.getElementById('precio_publicacion').value.replace(/\./g, ''));
       if (!precio || precio <= 0) {
         return 'Ingresá el precio de venta o elegí "No estoy seguro".';
       }
@@ -1102,7 +1110,7 @@
       equipamiento[cb.dataset.eq] = cb.checked;
     });
 
-    const precioParsed = precioMode === 'se' ? Number(document.getElementById('precio_publicacion').value) : null;
+    const precioParsed = precioMode === 'se' ? Number(document.getElementById('precio_publicacion').value.replace(/\./g, '')) : null;
 
     const data = {
       phone_number: phoneNumber,
@@ -1163,6 +1171,16 @@
       document.getElementById('form-state').style.display = 'none';
       document.getElementById('success-state').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
+
+      // Auto-redirect a WhatsApp con countdown
+      const countdownId = precioMode === 'se' ? 'countdown-precio' : 'countdown-val';
+      let segs = 4;
+      const tick = setInterval(() => {
+        segs--;
+        const el = document.getElementById(countdownId);
+        if (el) el.textContent = segs;
+        if (segs <= 0) { clearInterval(tick); volverAWhatsApp(); }
+      }, 1000);
 
     } catch (err) {
       console.error('Error al enviar:', err);
