@@ -926,8 +926,9 @@
 
   // ---- Parámetros de URL ----
   const params = new URLSearchParams(window.location.search);
-  // Bug conocido: URL parser decodifica '+' como espacio
-  const phoneNumber = (params.get('id') || '').replace(/^whatsapp:\s/, 'whatsapp:+');
+  // Strip any whatsapp: prefix (por si viene el formato viejo) y reconstruir limpio
+  const rawId = (params.get('id') || '').trim().replace(/^whatsapp:[+\s]?/, '');
+  const phoneNumber = rawId ? 'whatsapp:+' + rawId : '';
 
   // ---- Formato miles en precio ----
   document.getElementById('precio_publicacion').addEventListener('input', function () {
