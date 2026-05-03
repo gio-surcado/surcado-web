@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="robots" content="noindex, nofollow">
-  <title>Completá tu publicación — Surcado</title>
+  <title>Publicá tu auto — Surcado</title>
   <link rel="icon" href="/assets/logos/Icon_Surcado_blue.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
@@ -153,6 +153,181 @@
       letter-spacing: 0.5px;
     }
 
+    .field-label small {
+      font-weight: 600;
+      text-transform: none;
+      letter-spacing: 0;
+      font-size: 11px;
+      opacity: 0.8;
+    }
+
+    /* ---------- TWO-COLUMN ROW ---------- */
+    .field-row {
+      display: flex;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .field-row .field {
+      flex: 1;
+      margin-bottom: 0;
+      min-width: 0;
+    }
+
+    /* ---------- TEXT INPUT ---------- */
+    .text-input {
+      width: 100%;
+      padding: 13px 16px;
+      background: var(--gray-light);
+      border: 2px solid transparent;
+      border-radius: 14px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      transition: all 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+    }
+
+    .text-input:focus {
+      outline: none;
+      border-color: var(--blue);
+      background: var(--white);
+    }
+
+    .text-input::placeholder {
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    /* Remove number input arrows */
+    .text-input[type=number]::-webkit-inner-spin-button,
+    .text-input[type=number]::-webkit-outer-spin-button { -webkit-appearance: none; }
+    .text-input[type=number] { -moz-appearance: textfield; }
+
+    /* ---------- SELECT (año) ---------- */
+    .select-wrap {
+      position: relative;
+    }
+
+    .select-wrap::after {
+      content: '';
+      position: absolute;
+      right: 16px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 0;
+      border-left: 5px solid transparent;
+      border-right: 5px solid transparent;
+      border-top: 6px solid var(--muted);
+      pointer-events: none;
+    }
+
+    .select-input {
+      width: 100%;
+      padding: 13px 40px 13px 16px;
+      background: var(--gray-light);
+      border: 2px solid transparent;
+      border-radius: 14px;
+      font-family: 'Nunito Sans', sans-serif;
+      font-size: 15px;
+      color: var(--text);
+      transition: all 0.2s;
+      appearance: none;
+      -webkit-appearance: none;
+      cursor: pointer;
+    }
+
+    .select-input:focus {
+      outline: none;
+      border-color: var(--blue);
+      background: var(--white);
+    }
+
+    .select-input.placeholder-selected {
+      color: var(--muted);
+      opacity: 0.7;
+    }
+
+    /* ---------- PRICE FIELD ---------- */
+    .price-field-wrap {
+      display: flex;
+      align-items: center;
+      background: var(--gray-light);
+      border: 2px solid transparent;
+      border-radius: 14px;
+      transition: all 0.2s;
+      overflow: hidden;
+    }
+
+    .price-field-wrap:focus-within {
+      border-color: var(--blue);
+      background: var(--white);
+    }
+
+    .price-sym {
+      padding: 13px 0 13px 16px;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 17px;
+      color: var(--blue);
+      user-select: none;
+      flex-shrink: 0;
+    }
+
+    .price-field-input {
+      flex: 1;
+      padding: 13px 16px 13px 8px;
+      background: transparent;
+      border: none;
+      font-family: 'Nunito', sans-serif;
+      font-weight: 700;
+      font-size: 17px;
+      color: var(--text);
+      width: 100%;
+      appearance: none;
+      -webkit-appearance: none;
+      -moz-appearance: textfield;
+    }
+
+    .price-field-input:focus { outline: none; }
+    .price-field-input::placeholder { color: var(--muted); opacity: 0.7; font-weight: 600; }
+    .price-field-input::-webkit-inner-spin-button,
+    .price-field-input::-webkit-outer-spin-button { -webkit-appearance: none; }
+
+    /* ---------- VAL INFO CARD ---------- */
+    .val-info-card {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      background: var(--teal-soft);
+      border-radius: 16px;
+      padding: 18px 16px;
+      margin-top: 4px;
+    }
+
+    .val-info-icon {
+      font-size: 26px;
+      flex-shrink: 0;
+      line-height: 1;
+      margin-top: 2px;
+    }
+
+    .val-info-title {
+      font-family: 'Nunito', sans-serif;
+      font-weight: 800;
+      font-size: 14px;
+      color: #0F8378;
+      margin-bottom: 6px;
+    }
+
+    .val-info-text {
+      font-size: 13px;
+      color: #1A5E59;
+      line-height: 1.6;
+    }
+
     /* ---------- SEGMENTED CONTROL ---------- */
     .segmented {
       display: flex;
@@ -233,93 +408,8 @@
       box-shadow: 0 2px 4px rgba(0,0,0,0.15);
     }
 
-    .switch input:checked + .slider {
-      background: var(--blue);
-    }
-
-    .switch input:checked + .slider::before {
-      transform: translateX(20px);
-    }
-
-    /* ---------- PHOTO GRID ---------- */
-    .photo-hint {
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 14px;
-      line-height: 1.5;
-    }
-
-    .photo-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-    }
-
-    .photo-slot {
-      aspect-ratio: 1;
-      background: var(--gray-light);
-      border: 2px dashed #C8CDD9;
-      border-radius: 14px;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      cursor: pointer;
-      position: relative;
-      overflow: hidden;
-      transition: all 0.2s;
-    }
-
-    .photo-slot:hover {
-      border-color: var(--blue);
-      background: var(--blue-bg);
-    }
-
-    .photo-slot.has-photo {
-      border: 2px solid var(--teal);
-      background-size: cover;
-      background-position: center;
-      background-repeat: no-repeat;
-    }
-
-    .photo-slot input { display: none; }
-
-    .photo-slot .icon {
-      font-size: 22px;
-      margin-bottom: 4px;
-      opacity: 0.6;
-    }
-
-    .photo-slot .label {
-      font-size: 11px;
-      font-weight: 700;
-      color: var(--muted);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .photo-slot.has-photo .icon,
-    .photo-slot.has-photo .label { display: none; }
-
-    .photo-slot .remove {
-      position: absolute;
-      top: 6px;
-      right: 6px;
-      background: rgba(0, 0, 0, 0.65);
-      color: white;
-      width: 24px;
-      height: 24px;
-      border-radius: 50%;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      font-size: 16px;
-      font-weight: 700;
-      cursor: pointer;
-      line-height: 1;
-    }
-
-    .photo-slot.has-photo .remove { display: flex; }
+    .switch input:checked + .slider { background: var(--blue); }
+    .switch input:checked + .slider::before { transform: translateX(20px); }
 
     /* ---------- TEXTAREA ---------- */
     textarea {
@@ -343,10 +433,7 @@
       background: var(--white);
     }
 
-    textarea::placeholder {
-      color: var(--muted);
-      opacity: 0.7;
-    }
+    textarea::placeholder { color: var(--muted); opacity: 0.7; }
 
     /* ---------- SUBMIT ---------- */
     .submit-btn {
@@ -478,9 +565,7 @@
       box-shadow: 0 10px 24px rgba(81, 81, 198, 0.35);
     }
 
-    .back-to-wa-btn:active {
-      transform: translateY(0);
-    }
+    .back-to-wa-btn:active { transform: translateY(0); }
 
     .view-publication-link {
       display: inline-block;
@@ -495,25 +580,7 @@
       transition: all 0.2s;
     }
 
-    .view-publication-link:hover {
-      border-bottom-color: var(--blue);
-    }
-
-    /* ---------- DEBUG (solo C.1) ---------- */
-    .debug-data {
-      margin-top: 18px;
-      padding: 14px;
-      background: var(--gray-light);
-      border-radius: 12px;
-      font-family: 'Courier New', monospace;
-      font-size: 11px;
-      color: var(--muted);
-      text-align: left;
-      max-height: 220px;
-      overflow-y: auto;
-      white-space: pre-wrap;
-      word-break: break-all;
-    }
+    .view-publication-link:hover { border-bottom-color: var(--blue); }
   </style>
 </head>
 <body>
@@ -523,18 +590,152 @@
 
   <header class="header">
     <img src="/assets/logos/Surcado_blue.png" alt="Surcado" class="logo">
-    <div class="greeting">
-      ¡Hola! <span class="wave">👋</span>
+    <div class="greeting">¡Hola! <span class="wave">👋</span></div>
+
+    <!-- Header con datos del auto (modo chat → form) -->
+    <div id="header-con-auto" style="display:none;">
+      <div class="car-summary">
+        Revisá los datos y completá los detalles de<br>
+        <strong id="car-title"></strong>
+      </div>
+      <div class="price-line" id="car-price-line" style="display:none;">
+        Precio: <span id="car-price">$ —</span>
+      </div>
     </div>
-    <div class="car-summary">
-      Estás a un paso de publicar tu<br>
-      <strong id="car-title">...</strong>
+
+    <!-- Header genérico (modo form puro) -->
+    <div id="header-generico">
+      <div class="car-summary">
+        Completá los datos de tu auto para<br>
+        <strong>publicarlo en Surcado</strong>
+      </div>
     </div>
-    <div class="price-line">Precio: <span id="car-price">$ ...</span></div>
-    <div class="next-step">Completá los siguientes datos:</div>
+
+    <div class="next-step" style="margin-top:10px;">Completá los siguientes datos:</div>
   </header>
 
-  <!-- SECTION 1 -->
+  <!-- ====== SECTION 1: Tu auto (básico) ====== -->
+  <div class="section">
+    <div class="section-title">Tu auto</div>
+
+    <div class="field-row">
+      <div class="field">
+        <div class="field-label">Marca</div>
+        <input type="text" id="marca" class="text-input" placeholder="Toyota" autocomplete="off">
+      </div>
+      <div class="field">
+        <div class="field-label">Modelo</div>
+        <input type="text" id="modelo" class="text-input" placeholder="Corolla" autocomplete="off">
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <div class="field-label">Año</div>
+        <div class="select-wrap">
+          <select id="anio" class="select-input placeholder-selected">
+            <option value="" disabled selected>Seleccioná el año</option>
+          </select>
+        </div>
+      </div>
+      <div class="field">
+        <div class="field-label">Kilómetros</div>
+        <input type="number" id="kilometros" class="text-input" placeholder="80000" min="0" inputmode="numeric">
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">Versión</div>
+      <input type="text" id="version" class="text-input" placeholder="XEi 2.0 CVT" autocomplete="off">
+    </div>
+
+    <div class="field">
+      <div class="field-label">Combustible</div>
+      <div class="segmented">
+        <input type="radio" name="combustible" id="cb-nafta" value="nafta" checked>
+        <label for="cb-nafta">Nafta</label>
+        <input type="radio" name="combustible" id="cb-diesel" value="diesel">
+        <label for="cb-diesel">Diésel</label>
+        <input type="radio" name="combustible" id="cb-gnc" value="gnc">
+        <label for="cb-gnc">GNC</label>
+        <input type="radio" name="combustible" id="cb-electrico" value="electrico">
+        <label for="cb-electrico">Eléctr.</label>
+      </div>
+    </div>
+
+    <div class="field">
+      <div class="field-label">Puertas</div>
+      <div class="segmented">
+        <input type="radio" name="puertas" id="p-2" value="2">
+        <label for="p-2">2</label>
+        <input type="radio" name="puertas" id="p-3" value="3">
+        <label for="p-3">3</label>
+        <input type="radio" name="puertas" id="p-4" value="4" checked>
+        <label for="p-4">4</label>
+        <input type="radio" name="puertas" id="p-5" value="5">
+        <label for="p-5">5</label>
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <div class="field-label">Color</div>
+        <input type="text" id="color" class="text-input" placeholder="Blanco" autocomplete="off">
+      </div>
+      <div class="field">
+        <div class="field-label">Patente</div>
+        <input type="text" id="patente" class="text-input" placeholder="AB123CD" autocomplete="off" style="text-transform:uppercase;">
+      </div>
+    </div>
+
+    <div class="field-row">
+      <div class="field">
+        <div class="field-label">Provincia</div>
+        <input type="text" id="provincia" class="text-input" placeholder="Buenos Aires" autocomplete="off">
+      </div>
+      <div class="field">
+        <div class="field-label">Localidad</div>
+        <input type="text" id="localidad" class="text-input" placeholder="Palermo" autocomplete="off">
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SECTION 2: Precio ====== -->
+  <div class="section">
+    <div class="section-title">Precio de publicación</div>
+
+    <div class="field">
+      <div class="field-label">¿Sabés a cuánto querés venderlo?</div>
+      <div class="segmented">
+        <input type="radio" name="precio_mode" id="pm-se" value="se" checked>
+        <label for="pm-se">Sé el precio</label>
+        <input type="radio" name="precio_mode" id="pm-no" value="no">
+        <label for="pm-no">No estoy seguro</label>
+      </div>
+    </div>
+
+    <!-- Price input -->
+    <div class="field" id="precio-input-wrap">
+      <div class="field-label">Precio en pesos</div>
+      <div class="price-field-wrap">
+        <span class="price-sym">$</span>
+        <input type="number" id="precio_publicacion" class="price-field-input" placeholder="3.500.000" min="0" inputmode="numeric">
+      </div>
+    </div>
+
+    <!-- Info card valuación asistida -->
+    <div class="val-info-card" id="val-info-card" style="display:none;">
+      <div class="val-info-icon">📊</div>
+      <div>
+        <div class="val-info-title">Te escribimos con el precio por WhatsApp</div>
+        <div class="val-info-text">
+          Analizamos el mercado con los datos de tu auto y te enviamos un rango de precios sugerido directamente por WhatsApp. Vos decidís el precio final antes de publicar.
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ====== SECTION 3: Estado del auto ====== -->
   <div class="section">
     <div class="section-title">Estado del auto</div>
 
@@ -564,16 +765,9 @@
       </div>
     </div>
 
-    <div class="toggle-row">
-      <span class="toggle-label">Tiene GNC</span>
-      <label class="switch">
-        <input type="checkbox" id="tiene_gnc">
-        <span class="slider"></span>
-      </label>
-    </div>
   </div>
 
-  <!-- SECTION 2 -->
+  <!-- ====== SECTION 4: Equipamiento ====== -->
   <div class="section">
     <div class="section-title">Equipamiento</div>
 
@@ -657,7 +851,7 @@
     </div>
   </div>
 
-  <!-- SECTION 3 -->
+  <!-- ====== SECTION 5: Descripción ====== -->
   <div class="section">
     <div class="section-title">Descripción <small>(opcional)</small></div>
     <textarea id="descripcion" placeholder="Contales a los compradores qué hace especial a tu auto. ¿Lo cuidaste mucho? ¿Service al día en el oficial? ¿Algún detalle que quieras destacar?"></textarea>
@@ -666,7 +860,7 @@
   <button class="submit-btn" id="submit-btn">Publicar mi auto</button>
 
   <div class="error-msg" id="error-msg">
-    Hubo un error al publicar tu auto. Probá de nuevo en un momento.
+    Hubo un error. Probá de nuevo en un momento.
   </div>
 
   <p class="footer-note">
@@ -677,13 +871,15 @@
 
 <!-- ===== SUCCESS STATE ===== -->
 <div class="app" style="display:none;" id="success-state">
-  <div class="success">
+
+  <!-- Éxito: publicación con precio -->
+  <div class="success" id="success-con-precio">
     <div class="success-icon">🎉</div>
     <div class="success-title">¡Casi listo!</div>
     <p class="success-sub">
       Volvé a WhatsApp, ya te estamos escribiendo para que nos mandes 3 fotos del auto. En cuanto las recibamos, tu publicación queda activa.
     </p>
-    <div class="success-tag">Último paso</div>
+    <div class="success-tag">Último paso: las fotos</div>
     <br>
     <button class="back-to-wa-btn" onclick="volverAWhatsApp()">
       Volver a WhatsApp →
@@ -693,26 +889,155 @@
       Ver mi publicación
     </a>
   </div>
+
+  <!-- Éxito: valuación en curso -->
+  <div class="success" id="success-sin-precio" style="display:none;">
+    <div class="success-icon">📊</div>
+    <div class="success-title">¡Recibimos los datos!</div>
+    <p class="success-sub">
+      Ya estamos analizando el mercado para darte el mejor precio para tu auto. En minutos te escribimos por WhatsApp con la valuación.
+    </p>
+    <div class="success-tag">Valuación en proceso</div>
+    <br>
+    <button class="back-to-wa-btn" onclick="volverAWhatsApp()">
+      Volver a WhatsApp →
+    </button>
+  </div>
+
 </div>
 
 <script>
-  // ---- C.2.2: traer datos reales del auto desde n8n ----
+  // ---- Dropdown de años ----
+  (function buildAnioSelect() {
+    const sel = document.getElementById('anio');
+    const currentYear = new Date().getFullYear();
+    for (let y = currentYear; y >= 1980; y--) {
+      const opt = document.createElement('option');
+      opt.value = y;
+      opt.textContent = y;
+      sel.appendChild(opt);
+    }
+    sel.addEventListener('change', () => {
+      sel.classList.remove('placeholder-selected');
+    });
+  })();
+
+  // ---- Parámetros de URL ----
   const params = new URLSearchParams(window.location.search);
-  // URL parser decodifica '+' como espacio, restituirlo
+  // Bug conocido: URL parser decodifica '+' como espacio
   const phoneNumber = (params.get('id') || '').replace(/^whatsapp:\s/, 'whatsapp:+');
 
-  function renderCarHeader(car) {
-    const title = [car.marca, car.modelo, car.anio, car.version].filter(Boolean).join(' ');
-    document.getElementById('car-title').textContent = title || 'tu auto';
-    const precio = Number(car.precio_publicacion) || 0;
-    document.getElementById('car-price').textContent = precio
-      ? '$' + precio.toLocaleString('es-AR')
-      : '$ —';
+  // ---- Modo precio ----
+  let precioMode = 'se'; // 'se' | 'no'
+
+  document.querySelectorAll('input[name=precio_mode]').forEach(radio => {
+    radio.addEventListener('change', () => {
+      precioMode = document.querySelector('input[name=precio_mode]:checked').value;
+      updatePrecioUI();
+      updateSubmitLabel();
+    });
+  });
+
+  function updatePrecioUI() {
+    const showInput = precioMode === 'se';
+    document.getElementById('precio-input-wrap').style.display = showInput ? 'block' : 'none';
+    document.getElementById('val-info-card').style.display = showInput ? 'none' : 'flex';
   }
 
+  function updateSubmitLabel() {
+    const btn = document.getElementById('submit-btn');
+    if (!btn.disabled) {
+      btn.textContent = precioMode === 'se' ? 'Publicar mi auto' : 'Valorar y publicar';
+    }
+  }
+
+  // ---- Render header ----
+  function renderHeader(car) {
+    const tieneDatos = car && car.marca;
+    if (tieneDatos) {
+      const title = [car.marca, car.modelo, car.anio, car.version].filter(Boolean).join(' ');
+      document.getElementById('car-title').textContent = title;
+      document.getElementById('header-con-auto').style.display = 'block';
+      document.getElementById('header-generico').style.display = 'none';
+      const precio = Number(car.precio_publicacion);
+      if (precio) {
+        document.getElementById('car-price').textContent = '$' + precio.toLocaleString('es-AR');
+        document.getElementById('car-price-line').style.display = 'block';
+      }
+    } else {
+      document.getElementById('header-con-auto').style.display = 'none';
+      document.getElementById('header-generico').style.display = 'block';
+    }
+  }
+
+  // ---- Pre-poblar campos ----
+  function populateForm(car) {
+    if (!car) return;
+
+    const set = (id, val) => { if (val !== undefined && val !== null && val !== '') document.getElementById(id).value = val; };
+    const setRadio = (name, val) => {
+      if (!val) return;
+      const el = document.querySelector(`input[name="${name}"][value="${val}"]`);
+      if (el) el.checked = true;
+    };
+    const setCheck = (id, val) => { if (val !== undefined) document.getElementById(id).checked = !!val; };
+    const setCheckEq = (key, val) => {
+      const el = document.querySelector(`input[data-eq="${key}"]`);
+      if (el && val !== undefined) el.checked = !!val;
+    };
+
+    // Básicos
+    set('marca', car.marca);
+    set('modelo', car.modelo);
+    if (car.anio) {
+      const sel = document.getElementById('anio');
+      sel.value = car.anio;
+      if (sel.value) sel.classList.remove('placeholder-selected');
+    }
+    set('version', car.version);
+    set('kilometros', car.kilometros);
+    set('color', car.color);
+    set('patente', car.patente);
+    set('provincia', car.provincia);
+    set('localidad', car.localidad);
+    set('descripcion', car.descripcion);
+
+    // Radios básicos
+    setRadio('combustible', car.combustible);
+    setRadio('puertas', car.puertas);
+
+    // Precio
+    const precio = Number(car.precio_publicacion);
+    if (precio) {
+      document.getElementById('precio_publicacion').value = precio;
+      document.getElementById('pm-se').checked = true;
+      precioMode = 'se';
+    } else {
+      document.getElementById('pm-no').checked = true;
+      precioMode = 'no';
+    }
+    updatePrecioUI();
+    updateSubmitLabel();
+
+    // Estado / equipamiento
+    setRadio('estado_general', car.estado_general);
+    setRadio('transmision', car.transmision);
+    // tiene_gnc se deriva del combustible seleccionado
+    setCheck('service_al_dia', car.service_al_dia);
+    setRadio('vidrios', car.vidrios_electricos);
+    setRadio('llantas', car.tipo_llantas);
+    setRadio('tapizado', car.tapizado);
+    setRadio('airbags', car.airbags !== undefined ? String(car.airbags) : null);
+
+    if (car.equipamiento && typeof car.equipamiento === 'object') {
+      Object.entries(car.equipamiento).forEach(([key, val]) => setCheckEq(key, val));
+    }
+  }
+
+  // ---- Cargar datos del auto desde webhook ----
   async function cargarDatosAuto() {
     if (!phoneNumber) {
-      renderCarHeader({});
+      renderHeader(null);
       return;
     }
     try {
@@ -723,32 +1048,84 @@
       });
       if (!res.ok) throw new Error('webhook respondió ' + res.status);
       const data = await res.json();
-      if (!data.ok) throw new Error(data.error || 'no encontrado');
-      renderCarHeader(data);
+      if (!data.ok) throw new Error(data.error || 'sin datos');
+      renderHeader(data);
+      populateForm(data);
     } catch (err) {
-      console.error('Error cargando datos del auto:', err);
-      renderCarHeader({});
+      console.error('Error cargando datos:', err);
+      renderHeader(null);
     }
   }
 
   cargarDatosAuto();
 
-  // ---- Submit real al webhook publicacion-completada ----
+  // ---- Validación ----
+  function validarForm() {
+    const reqs = [
+      { id: 'marca', label: 'Marca' },
+      { id: 'modelo', label: 'Modelo' },
+      { id: 'anio', label: 'Año' },
+      { id: 'kilometros', label: 'Kilómetros' },
+      { id: 'color', label: 'Color' },
+      { id: 'provincia', label: 'Provincia' },
+      { id: 'localidad', label: 'Localidad' },
+    ];
+    for (const r of reqs) {
+      if (!document.getElementById(r.id).value.trim()) {
+        return `Completá el campo "${r.label}" para continuar.`;
+      }
+    }
+    if (precioMode === 'se') {
+      const precio = Number(document.getElementById('precio_publicacion').value);
+      if (!precio || precio <= 0) {
+        return 'Ingresá el precio de venta o elegí "No estoy seguro".';
+      }
+    }
+    return null;
+  }
+
+  // ---- Submit ----
   document.getElementById('submit-btn').addEventListener('click', async () => {
     const btn = document.getElementById('submit-btn');
     const errorMsg = document.getElementById('error-msg');
+
+    const validError = validarForm();
+    if (validError) {
+      errorMsg.textContent = validError;
+      errorMsg.style.display = 'block';
+      errorMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      return;
+    }
 
     const equipamiento = {};
     document.querySelectorAll('input[data-eq]').forEach(cb => {
       equipamiento[cb.dataset.eq] = cb.checked;
     });
 
+    const precioParsed = precioMode === 'se' ? Number(document.getElementById('precio_publicacion').value) : null;
+
     const data = {
       phone_number: phoneNumber,
+      // Básicos
+      marca: document.getElementById('marca').value.trim(),
+      modelo: document.getElementById('modelo').value.trim(),
+      anio: document.getElementById('anio').value.trim(),
+      version: document.getElementById('version').value.trim() || null,
+      kilometros: document.getElementById('kilometros').value.trim(),
+      combustible: document.querySelector('input[name=combustible]:checked')?.value,
+      puertas: document.querySelector('input[name=puertas]:checked')?.value,
+      color: document.getElementById('color').value.trim(),
+      patente: document.getElementById('patente').value.trim().toUpperCase(),
+      provincia: document.getElementById('provincia').value.trim(),
+      localidad: document.getElementById('localidad').value.trim(),
+      // Precio
+      precio_mode: precioMode,
+      precio_publicacion: precioParsed,
+      // Estado / equip
       estado_general: document.querySelector('input[name=estado_general]:checked')?.value,
       transmision: document.querySelector('input[name=transmision]:checked')?.value,
       service_al_dia: document.getElementById('service_al_dia').checked,
-      tiene_gnc: document.getElementById('tiene_gnc').checked,
+      tiene_gnc: document.querySelector('input[name=combustible]:checked')?.value === 'gnc',
       vidrios_electricos: document.querySelector('input[name=vidrios]:checked')?.value,
       tipo_llantas: document.querySelector('input[name=llantas]:checked')?.value,
       tapizado: document.querySelector('input[name=tapizado]:checked')?.value,
@@ -757,9 +1134,8 @@
       descripcion: document.getElementById('descripcion').value
     };
 
-    // Loading state
     btn.disabled = true;
-    btn.textContent = 'Publicando...';
+    btn.textContent = 'Enviando...';
     errorMsg.style.display = 'none';
 
     try {
@@ -770,35 +1146,38 @@
       });
       if (!res.ok) throw new Error('webhook respondió ' + res.status);
       const result = await res.json();
-      if (!result.ok) throw new Error(result.error || 'No se pudo publicar');
+      if (!result.ok) throw new Error(result.error || 'No se pudo procesar');
 
-      // Setear link a la publicación recién creada
-      if (result.id !== undefined && result.id !== null) {
-        document.getElementById('view-publication-link').href = `/marketplace-x7k2/${result.id}`;
+      // Mostrar variante de success correcta
+      if (precioMode === 'se') {
+        document.getElementById('success-con-precio').style.display = 'block';
+        document.getElementById('success-sin-precio').style.display = 'none';
+        if (result.id !== undefined && result.id !== null) {
+          document.getElementById('view-publication-link').href = `/marketplace-x7k2/${result.id}`;
+        }
+      } else {
+        document.getElementById('success-sin-precio').style.display = 'block';
+        document.getElementById('success-con-precio').style.display = 'none';
       }
 
-      // Éxito: mostrar success state
       document.getElementById('form-state').style.display = 'none';
       document.getElementById('success-state').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
+
     } catch (err) {
-      console.error('Error al publicar:', err);
+      console.error('Error al enviar:', err);
       btn.disabled = false;
-      btn.textContent = 'Publicar mi auto';
+      btn.textContent = precioMode === 'se' ? 'Publicar mi auto' : 'Valorar y publicar';
+      errorMsg.textContent = 'Hubo un error. Probá de nuevo en un momento.';
       errorMsg.style.display = 'block';
     }
   });
 
   // ---- Volver a WhatsApp ----
-  // Usamos el protocolo nativo `whatsapp://` que abre la app directamente,
-  // sin pasar por el browser. Si por algún motivo no abre (raro: WhatsApp
-  // no instalado), fallback a wa.me como red de seguridad.
   function volverAWhatsApp() {
     window.location.href = 'whatsapp://send?phone=14155238886';
     setTimeout(() => {
-      if (!document.hidden) {
-        window.location.href = 'https://wa.me/14155238886';
-      }
+      if (!document.hidden) window.location.href = 'https://wa.me/14155238886';
     }, 1500);
   }
 </script>
